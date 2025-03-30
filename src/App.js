@@ -1,24 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import $ from "jquery";
+import { BrowserRouter as Router, Routes, Route, Form } from "react-router-dom";
+import Header from '../src/components/Header';
+import Footer from '../src/components/Footer';
+import Login from '../src/components/Login';
+import Register from '../src/components/Register';
+import ManageMovies from '../src/components/ManageMovies';
+import WorkShedule from '../src/components/WorkShedule';
+import UpdateWorkSchedule from '../src/components/UpdateWorkSchedule';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router> {/* Đặt Router ở ngoài cùng */}
+      <div className="App">
+        <Header />
+        
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/manageMovies" element={<ManageMovies />} />
+          <Route path="/workShedule" element={<WorkShedule />} />
+          <Route path="/update/:id" element={<UpdateWorkSchedule />} />
+        </Routes>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
