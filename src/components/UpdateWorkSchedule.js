@@ -5,7 +5,6 @@ export default function UpdateWorkSchedule() {
     const { id } = useParams(); // Lấy ID từ URL
     const navigate = useNavigate(); // Điều hướng sau khi cập nhật
     const [formData, setFormData] = useState({
-        maNhanVien: "",
         ngayLam: "",
         gioBatDau: "",
         gioKetThuc: "",
@@ -19,7 +18,6 @@ export default function UpdateWorkSchedule() {
                 const data = await response.json();
     
                 setFormData({
-                    maNhanVien: data.data.maNhanVien,
                     ngayLam: data.data.ngayLam.split("T")[0], // YYYY-MM-DD
     
                     // Chuyển đổi giờ từ UTC về local và format HH:mm
@@ -52,7 +50,7 @@ export default function UpdateWorkSchedule() {
 
     // Gửi API cập nhật
     const handleUpdate = async () => {
-        const { maNhanVien, ngayLam, gioBatDau, gioKetThuc, loaiCaTruc } = formData;
+        const { ngayLam, gioBatDau, gioKetThuc, loaiCaTruc } = formData;
     
         try {
             const response = await fetch(`http://localhost:8080/workSchedule/${id}`, {
@@ -61,7 +59,6 @@ export default function UpdateWorkSchedule() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    maNhanVien,
                     ngayLam,   // Gửi nguyên ngày "YYYY-MM-DD"
                     gioBatDau, // Gửi giờ dưới dạng "HH:mm"
                     gioKetThuc,
@@ -83,10 +80,6 @@ export default function UpdateWorkSchedule() {
     return (
         <div className="update-container">
             <h2>Cập nhật lịch làm việc</h2>
-            <div className="form-group">
-                <label>Nhân viên:</label>
-                <input type="text" name="maNhanVien" value={formData.maNhanVien} onChange={handleChange} />
-            </div>
 
             <div className="form-group">
                 <label>Ngày làm:</label>

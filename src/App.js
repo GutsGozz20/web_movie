@@ -9,6 +9,9 @@ import Register from '../src/components/Register';
 import ManageMovies from '../src/components/ManageMovies';
 import WorkShedule from '../src/components/WorkShedule';
 import UpdateWorkSchedule from '../src/components/UpdateWorkSchedule';
+import EmployeeList from '../src/components/Employee';
+import WorkScheduleEmployee from '../src/components/WorkSheduleEmployee';
+import UpdateWorkScheduleEmployee from '../src/components/UpdateWorkSheduleEmployee';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path="/manageMovies" element={<ManageMovies />} />
           <Route path="/workShedule" element={<WorkShedule />} />
           <Route path="/update/:id" element={<UpdateWorkSchedule />} />
+          <Route path="/workSheduleEmployee" element={<WorkScheduleEmployee />} />
+          <Route path="//update-work-schedule/:id" element={<UpdateWorkScheduleEmployee />} />
+          <Route path="/employee" element={<EmployeeList />} />
         </Routes>
 
         <Footer />

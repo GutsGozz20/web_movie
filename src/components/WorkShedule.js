@@ -12,7 +12,6 @@ export default function WorkScheduleList() {
 
 
     // State để thêm lịch làm việc
-    const [maNhanVien, setMaNhanVien] = useState("");
     const [ngayLam, setNgayLam] = useState("");
     const [gioBatDau, setGioBatDau] = useState("");
     const [gioKetThuc, setGioKetThuc] = useState("");
@@ -60,13 +59,12 @@ export default function WorkScheduleList() {
 
     // Hàm thêm lịch làm việc mới
     const handleAddSchedule = async () => {
-        if (!maNhanVien || !ngayLam || !gioBatDau || !gioKetThuc || !loaiCaTruc) {
+        if (!ngayLam || !gioBatDau || !gioKetThuc || !loaiCaTruc) {
             alert("Vui lòng nhập đầy đủ thông tin!");
             return;
         }
 
         const newSchedule = {
-            maNhanVien,
             ngayLam,
             gioBatDau,
             gioKetThuc,
@@ -91,7 +89,6 @@ export default function WorkScheduleList() {
             setAllSchedules([...allSchedules, data.data]); // Cập nhật danh sách gốc
 
             // Reset form sau khi thêm
-            setMaNhanVien("");
             setNgayLam("");
             setGioBatDau("");
             setGioKetThuc("");
@@ -143,7 +140,6 @@ export default function WorkScheduleList() {
             <div className="add-form">
                 <h2>Thêm lịch làm việc</h2>
                 <div className="form-group">
-                    <input type="text" placeholder="Mã nhân viên" value={maNhanVien} onChange={e => setMaNhanVien(e.target.value)} />
                     <input type="date" value={ngayLam} onChange={e => setNgayLam(e.target.value)} />
                     <input type="time" value={gioBatDau} onChange={e => setGioBatDau(e.target.value)} />
                     <input type="time" value={gioKetThuc} onChange={e => setGioKetThuc(e.target.value)} />
@@ -158,7 +154,6 @@ export default function WorkScheduleList() {
                 <table className="work-schedule-table">
                     <thead>
                         <tr>
-                            <th>Nhân viên</th>
                             <th>Ngày làm</th>
                             <th>Giờ bắt đầu</th>
                             <th>Giờ kết thúc</th>
@@ -169,7 +164,6 @@ export default function WorkScheduleList() {
                     <tbody>
                         {workSchedules.length > 0 ? workSchedules.map((ws, index) => (
                             <tr key={index}>
-                                <td>{ws.maNhanVien}</td>
                                 <td>{new Date(ws.ngayLam).toLocaleDateString("vi-VN")}</td>
                                 <td>{new Date(ws.gioBatDau).toLocaleTimeString()}</td>
                                 <td>{new Date(ws.gioKetThuc).toLocaleTimeString()}</td>

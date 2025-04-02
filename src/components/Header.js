@@ -167,14 +167,14 @@ export default function Header() {
                             </Link>
                         </li>
                         <li className="treeview">
-                            <a asp-area="Admin" asp-controller="HoaDonAdmin" asp-action="Index">
-                                <i className="fa fa-dashboard"></i> <span>Danh sách hóa đơn</span>
-                            </a>
+                            <Link to="/employee" >
+                                <i className="fa fa-dashboard"></i> <span>Danh sách nhân viên</span>
+                            </Link>
                         </li>
                         <li className="treeview">
-                            <a asp-area="Admin" asp-controller="GopYAdmin" asp-action="Index">
-                                <i className="fa fa-dashboard"></i> <span>Danh sách liên hệ</span>
-                            </a>
+                            <Link to="/workSheduleEmployee" >
+                                <i className="fa fa-dashboard"></i> <span>Danh sách ca trực</span>
+                            </Link>
                         </li>
                         <li className="treeview">
                             <a href="#">
