@@ -1,128 +1,172 @@
+import { useState } from 'react';
 import { Link } from "react-router-dom";
-
+import { Film , Calendar, BarChart, Users,List,LayoutDashboard,MonitorPlay,Theater  } from "lucide-react";
 
 export default function Header() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     return (
         <div className="wrapper skin-blue">
             <header className="main-header">
-            {/* Logo */}
-            <a href="index2.html" className="logo"><b>Admin</b>LTE</a>
+                {/* Logo */}
+                <Link to="/" className="logo"><b>Admin</b>LTE</Link>
 
-            {/* Navbar */}
-            <nav className="navbar navbar-static-top" role="navigation">
-                {/* Sidebar toggle button */}
-                <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span className="sr-only">Toggle navigation</span>
-                </a>
+                {/* Navbar */}
+                <nav className="navbar navbar-static-top" role="navigation">
+                    {/* Sidebar toggle button */}
+                    <button 
+                        onClick={toggleSidebar}
+                        className="sidebar-toggle" 
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="sr-only">Toggle navigation</span>
+                    </button>
 
-                <div className="navbar-custom-menu">
-                    <ul className="nav navbar-nav">
-                        {/* Messages Dropdown */}
-                        <li className="dropdown messages-menu">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <i className="fa fa-envelope-o"></i>
-                                <span className="label label-success">4</span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">You have 4 messages</li>
-                                <li>
-                                    <ul className="menu">
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    {/* <img src="%PUBLIC_URL%/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" /> */}
+                    <div className="navbar-custom-menu">
+                        <ul className="nav navbar-nav">
+                            {/* Messages Dropdown */}
+                            <li className="dropdown messages-menu">
+                                <button 
+                                    onClick={toggleDropdown}
+                                    className="dropdown-toggle" 
+                                    aria-expanded={isDropdownOpen}
+                                >
+                                    <i className="fa fa-envelope-o"></i>
+                                    <span className="label label-success">4</span>
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className="dropdown-menu">
+                                        <div className="header">You have 4 messages</div>
+                                        <div className="menu">
+                                            <div className="message-item">
+                                                <div className="message-content">
+                                                    <h4>
+                                                        Support Team
+                                                        <small><i className="fa fa-clock-o"></i> 5 mins</small>
+                                                    </h4>
+                                                    <p>Why not buy a new awesome theme?</p>
                                                 </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i className="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
+                                            </div>
+                                        </div>
+                                        <div className="footer">
+                                            <Link to="/messages">See All Messages</Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
 
-                        {/* Notifications Dropdown */}
-                        <li className="dropdown notifications-menu">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <i className="fa fa-bell-o"></i>
-                                <span className="label label-warning">10</span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">You have 10 notifications</li>
-                                <li>
-                                    <ul className="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
+                            {/* Notifications Dropdown */}
+                            <li className="dropdown notifications-menu">
+                                <button 
+                                    onClick={toggleDropdown}
+                                    className="dropdown-toggle" 
+                                    aria-expanded={isDropdownOpen}
+                                >
+                                    <i className="fa fa-bell-o"></i>
+                                    <span className="label label-warning">10</span>
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className="dropdown-menu">
+                                        <div className="header">You have 10 notifications</div>
+                                        <div className="menu">
+                                            <div className="notification-item">
+                                                <p>New user registered</p>
+                                            </div>
+                                        </div>
+                                        <div className="footer">
+                                            <Link to="/notifications">View all</Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
 
-                        {/* Tasks Dropdown */}
-                        <li className="dropdown tasks-menu">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <i className="fa fa-flag-o"></i>
-                                <span className="label label-danger">9</span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="header">You have 9 tasks</li>
-                                <li>
-                                    <ul className="menu">
-                                        <li>
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small className="pull-right">20%</small>
-                                                </h3>
-                                                <div className="progress xs">
-                                                    <div className="progress-bar progress-bar-aqua" style={{ width: "20%" }} role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span className="sr-only">20% Complete</span>
+                            {/* Tasks Dropdown */}
+                            <li className="dropdown tasks-menu">
+                                <button 
+                                    onClick={toggleDropdown}
+                                    className="dropdown-toggle" 
+                                    aria-expanded={isDropdownOpen}
+                                >
+                                    <i className="fa fa-flag-o"></i>
+                                    <span className="label label-danger">9</span>
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className="dropdown-menu">
+                                        <div className="header">You have 9 tasks</div>
+                                        <div className="menu">
+                                            <div className="task-item">
+                                                <div className="task-content">
+                                                    <h4>
+                                                        Design some buttons
+                                                        <small className="pull-right">20%</small>
+                                                    </h4>
+                                                    <div className="progress xs">
+                                                        <div className="progress-bar progress-bar-aqua" style={{ width: "20%" }} role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                            <span className="sr-only">20% Complete</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        {/* User Account Dropdown */}
-                        <li className="dropdown user user-menu">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <span className="hidden-xs">Username</span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="user-footer">
-                                    <div className="pull-left">
-                                        <a href="#" className="btn btn-default btn-flat">Profile</a>
+                                            </div>
+                                        </div>
+                                        <div className="footer">
+                                            <Link to="/tasks">View all tasks</Link>
+                                        </div>
                                     </div>
-                                    <div className="pull-right">
-                                        <a href="#" className="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
+                                )}
+                            </li>
 
-                        {/* Login Button */}
-                        <li>
-                            <Link to="/login">
-                                <i className="text-dark" style={{ position: "relative", color: "black" }}>Login</i>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                            {/* User Account */}
+                            <li className="dropdown user user-menu">
+                                <button 
+                                    onClick={toggleDropdown}
+                                    className="dropdown-toggle" 
+                                    aria-expanded={isDropdownOpen}
+                                >
+                                    <img src="%PUBLIC_URL%/dist/img/user2-160x160.jpg" className="user-image" alt="User Image" />
+                                    <span className="hidden-xs">Alexander Pierce</span>
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className="dropdown-menu">
+                                        <div className="user-header">
+                                            <img src="%PUBLIC_URL%/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image" />
+                                            <p>
+                                                Alexander Pierce - Web Developer
+                                                <small>Member since Nov. 2012</small>
+                                            </p>
+                                        </div>
+                                        <div className="menu">
+                                            <Link to="/profile">
+                                                <i className="fa fa-user"></i> Profile
+                                            </Link>
+                                            <Link to="/settings">
+                                                <i className="fa fa-gear"></i> Settings
+                                            </Link>
+                                            <Link to="/logout">
+                                                <i className="fa fa-sign-out"></i> Sign out
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </li>
+
+                            {/* Login Button */}
+                            <li>
+                                <Link to="/login">
+                                    <i className="text-dark" style={{ position: "relative", color: "black" }}>Login</i>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </header>
             <aside className="main-sidebar">
                 {/* <!-- sidebar: style can be found in sidebar.less --> */}
@@ -133,7 +177,7 @@ export default function Header() {
                             {/* <img src="%PUBLIC_URL%/dist/img/IMG_6799.JPG" className="img-circle" alt="User Image" /> */}
                         </div>
                         <div className="pull-left info">
-                            <p>Trần Lê Anh Quân</p>
+                            <p>Admin Movies</p>
 
                             <a href="#"><i className="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -147,110 +191,85 @@ export default function Header() {
                             </span>
                         </div>
                     </form>
-                    {/* <!-- /.search form --> */}
-                    {/* <!-- sidebar menu: : style can be found in sidebar.less --> */}
-                    <ul className="sidebar-menu">
-                        <li className="header">MAIN NAVIGATION</li>
-                        <li className="active treeview">
-                            <a>
-                                <i className="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li className="treeview">
-                            <Link to="/manageMovies" >
-                                <i className="fa fa-dashboard"></i> <span>Danh sách phim</span>
-                            </Link>
-                        </li>
-                        <li className="treeview">
-                            <Link to="/workShedule">
-                                <i className="fa fa-dashboard"></i> <span>Lịch làm việc</span>
-                            </Link>
-                        </li>
-                        <li className="treeview">
-                            <Link to="/employee" >
-                                <i className="fa fa-dashboard"></i> <span>Danh sách nhân viên</span>
-                            </Link>
-                        </li>
-                        <li className="treeview">
-                            <Link to="/workSheduleEmployee" >
-                                <i className="fa fa-dashboard"></i> <span>Danh sách ca trực</span>
-                            </Link>
-                        </li>
-                        <li className="treeview">
-                            <a href="#">
-                                <i className="fa fa-files-o"></i>
-                                <span>Layout Options</span>
-                                <span className="label label-primary pull-right">4</span>
-                            </a>
-                            <ul className="treeview-menu">
-                                <li><a href="%PUBLIC_URL%/pages/layout/top-nav.html"><i className="fa fa-circle-o"></i> Top Navigation</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/layout/boxed.html"><i className="fa fa-circle-o"></i> Boxed</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/layout/fixed.html"><i className="fa fa-circle-o"></i> Fixed</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/layout/collapsed-sidebar.html"><i className="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="%PUBLIC_URL%/pages/widgets.html">
-                                <i className="fa fa-th"></i> <span>Widgets</span> <small className="label pull-right bg-green">new</small>
-                            </a>
-                        </li>
-                        <li className="treeview">
-                            <a href="#">
-                                <i className="fa fa-pie-chart"></i>
-                                <span>Charts</span>
-                                <i className="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul className="treeview-menu">
-                                <li><a href="%PUBLIC_URL%/pages/charts/morris.html"><i className="fa fa-circle-o"></i> Morris</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/charts/flot.html"><i className="fa fa-circle-o"></i> Flot</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/charts/inline.html"><i className="fa fa-circle-o"></i> Inline charts</a></li>
-                            </ul>
-                        </li>
-                        <li className="treeview">
-                            <a href="#">
-                                <i className="fa fa-laptop"></i>
-                                <span>UI Elements</span>
-                                <i className="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul className="treeview-menu">
-                                <li><a href="%PUBLIC_URL%/pages/UI/general.html"><i className="fa fa-circle-o"></i> General</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/UI/icons.html"><i className="fa fa-circle-o"></i> Icons</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/UI/buttons.html"><i className="fa fa-circle-o"></i> Buttons</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/UI/sliders.html"><i className="fa fa-circle-o"></i> Sliders</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/UI/timeline.html"><i className="fa fa-circle-o"></i> Timeline</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/UI/modals.html"><i className="fa fa-circle-o"></i> Modals</a></li>
-                            </ul>
-                        </li>
-                        <li className="treeview">
-                            <a href="#">
-                                <i className="fa fa-edit"></i> <span>Forms</span>
-                                <i className="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul className="treeview-menu">
-                                <li><a href="%PUBLIC_URL%/pages/forms/general.html"><i className="fa fa-circle-o"></i> General Elements</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/forms/advanced.html"><i className="fa fa-circle-o"></i> Advanced Elements</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/forms/editors.html"><i className="fa fa-circle-o"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li className="treeview">
-                            <a href="#">
-                                <i className="fa fa-table"></i> <span>Tables</span>
-                                <i className="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul className="treeview-menu">
-                                <li><a href="%PUBLIC_URL%/pages/tables/simple.html"><i className="fa fa-circle-o"></i> Simple tables</a></li>
-                                <li><a href="%PUBLIC_URL%/pages/tables/data.html"><i className="fa fa-circle-o"></i> Data tables</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="%PUBLIC_URL%/pages/calendar.html">
-                                <i className="fa fa-calendar"></i> <span>Calendar</span>
-                                <small className="label pull-right bg-red">3</small>
-                            </a>
-                        </li>
-                    </ul>
+       <ul className="space-y-1">
+           <li className="text-sm uppercase text-gray-500 font-semibold px-4 py-3">MAIN NAVIGATION</li>
+           <li className="border-l-4 border-blue-500 bg-blue-50">
+               <a href="/" className="flex items-center space-x-4 px-6 py-4 text-blue-600 hover:bg-blue-100 transition-colors duration-200">
+                   {/* <i className="fa fa-dashboard text-blue-500 text-3xl"></i> */}
+                   <LayoutDashboard className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Dashboard</span>
+               </a>
+           </li>
+           <li>
+               <Link 
+                   to="/movies" 
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   <Film className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Quản lý phim</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/showtimes" 
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   <MonitorPlay className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Quản lý suất chiếu</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/cinema-rooms" 
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   <Theater className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Quản lý phòng chiếu</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/workShedule"
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   {/* <i className="fa fa-calendar text-gray-500 text-xl"></i> */}
+                   <Calendar className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Lịch làm việc</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/employee"
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   {/* <i className="fa fa-users text-gray-500 text-xl"></i> */}
+                   <Users className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Danh sách nhân viên</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/workSheduleEmployee"
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   {/* <i className="fa fa-clock-o text-gray-500 text-xl"></i> */}
+                   <List className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Danh sách ca trực</span>
+               </Link>
+           </li>
+           <li>
+               <Link 
+                   to="/workScheduleStats"
+                   className="flex items-center space-x-4 px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+               >
+                   {/* <i className="fa fa-bar-chart text-gray-500 text-xl"></i> */}
+                   <BarChart className="w-7 h-7 text-blue-500" />
+                   <span className="text-2xl font-medium">Thống kê lịch làm việc</span>
+               </Link>
+           </li>
+       </ul>
                 </section>
-                {/* <!-- /.sidebar --> */}
+    
             </aside>
         </div>
     );
